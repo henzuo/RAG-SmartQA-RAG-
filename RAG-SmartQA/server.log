@@ -1,0 +1,9 @@
+INFO:     Will watch for changes in these directories: ['C:\\Users\\admin\\Desktop\\学习\\编程项目\\RAG-SmartQA']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [50848] using WatchFiles
+INFO:     Started server process [61908]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:1079 - "GET / HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'api.py'. Reloading...
+ 

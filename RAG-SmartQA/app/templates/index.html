@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAG-SmartQA 智能问答系统</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>RAG-SmartQA 智能问答系统</h1>
+
+        <!-- Tab导航 -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('docs')">文档管理</button>
+            <button class="tab-btn" onclick="switchTab('chat')">聊天问答</button>
+            <button class="tab-btn" onclick="switchTab('debug')">检索调试</button>
+        </div>
+
+        <!-- ===== 文档管理页 ===== -->
+        <div id="docs-tab" class="tab-content active">
+            <div class="upload-section">
+                <h2>上传文档</h2>
+                <div class="upload-form">
+                    <input type="file" id="file-input" accept=".txt,.pdf,.docx">
+                    <select id="strategy-select">
+                        <!-- 动态填充策略列表 -->
+                    </select>
+                    <button onclick="uploadFile()">上传</button>
+                </div>
+                <div id="upload-result"></div>
+            </div>
+
+            <div class="doc-list-section">
+                <h2>已上传文档</h2>
+                <div id="doc-list"></div>
+                <div id="stats-info"></div>
+            </div>
+        </div>
+
+        <!-- ===== 聊天问答页 ===== -->
+        <div id="chat-tab" class="tab-content">
+            <div class="chat-layout">
+                <!-- 左侧设置面板 -->
+                <div class="chat-settings">
+                    <h3>检索设置</h3>
+                    <label>Agent模式：
+                        <select id="chat-mode">
+                            <option value="cot">CoT 思维链</option>
+                            <option value="react">ReAct 推理-行动</option>
+                        </select>
+                    </label>
+                    <label>Top-K：
+                        <input type="number" id="chat-top-k" value="3" min="1" max="10">
+                    </label>
+                    <label>Score阈值：
+                        <input type="number" id="chat-threshold" value="0" min="0" max="1" step="0.1">
+                    </label>
+                    <label>
+                        <input type="checkbox" id="chat-hybrid"> 启用混合检索
+                    </label>
+                    <button onclick="clearChatHistory()">清空对话</button>
+                </div>
+
+                <!-- 右侧聊天窗口 -->
+                <div class="chat-window">
+                    <div id="chat-messages"></div>
+                    <div class="chat-input">
+                        <input type="text" id="chat-input" placeholder="输入问题..." onkeypress="if(event.key==='Enter')sendMessage()">
+                        <button onclick="sendMessage()">发送</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== 检索调试页 ===== -->
+        <div id="debug-tab" class="tab-content">
+            <h2>检索调试</h2>
+            <div class="debug-search">
+                <input type="text" id="debug-query" placeholder="输入查询内容...">
+                <select id="debug-mode">
+                    <option value="vector">向量检索</option>
+                    <option value="keyword">关键词检索</option>
+                    <option value="hybrid">混合检索</option>
+                </select>
+                <button onclick="debugSearch()">搜索</button>
+            </div>
+            <div id="debug-results"></div>
+        </div>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
